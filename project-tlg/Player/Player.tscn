@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dtmfsjdxqf3vf" path="res://Player/Images/TLG-Player-Animations-Clothed-Sheet-RAW.png" id="2_8w3vv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3kol"]
-size = Vector2(7, 31)
+size = Vector2(10, 38)
 
 [sub_resource type="Animation" id="Animation_5ry21"]
 resource_name = "player_still"
@@ -95,8 +95,8 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 2.82843),
 "update": 1,
 "values": [11, 12]
 }
@@ -144,15 +144,15 @@ _data = {
 }
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-floor_snap_length = 2.5
+floor_snap_length = 3.0
 script = ExtResource("1_7pc3d")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 8.5)
+position = Vector2(1, 12)
 shape = SubResource("RectangleShape2D_q3kol")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(2, 2)
 texture = ExtResource("2_8w3vv")
 hframes = 61
 
@@ -162,7 +162,7 @@ libraries = {
 }
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 drag_horizontal_enabled = true

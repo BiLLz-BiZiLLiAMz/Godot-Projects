@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 # Player Nodes
 var Collider;
@@ -7,8 +7,8 @@ var Sprite;
 var Camera;
 
 # Player movement
-const SPEED = 100;
-const JUMP_VELOCITY = -250.0;
+const SPEED = 160;
+const JUMP_VELOCITY = -290.0;
 var GRAVITY = 600;
 var Facing;
 var SpriteXScale;
