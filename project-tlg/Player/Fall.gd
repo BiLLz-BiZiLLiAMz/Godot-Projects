@@ -30,6 +30,7 @@ func Update(delta: float):
 	else:
 		pass
 
+
 func HandleAnimations():
 	Player.Animator.play("player_fall")
 		

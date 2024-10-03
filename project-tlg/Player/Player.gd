@@ -9,6 +9,7 @@ class_name PlayerController extends CharacterBody2D
 @onready var StateMachine = $StateMachine
 @onready var StateLabel = $StateLabel
 
+# State Machine
 @onready var STATES = $STATES
 
 #region Player Physics Constants
