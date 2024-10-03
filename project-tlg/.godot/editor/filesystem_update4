@@ -1,10 +1,8 @@
-res://playground.tscn
 res://Player/Player.tscn
-res://Player/Airborn.gd
-res://Player/Grounded.gd
-res://Player/StateMachine.gd
-res://Player/Locked.gd
-res://Player/PlayerState.gd
 res://Player/Player.gd
-res://Player/Jump.gd
+res://Player/PlayerState.gd
+res://playground.tscn
+res://Player/Grounded.gd
 res://Player/Fall.gd
+res://Player/Jump.gd
+res://Player/Locked.gd

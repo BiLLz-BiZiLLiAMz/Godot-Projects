@@ -1,19 +1,21 @@
-class_name Grounded extends PlayerState
+extends PlayerState
 
-@export var jump: PlayerState
-@export var fall: PlayerState
 
-func ProcessInput(event: InputEvent) -> PlayerState:
-	# Handle player jump
-	if (Input.is_action_just_pressed("MoveUp") and Player.is_on_floor()):
-		return jump
-	return null
+func EnterState():
+	pass
 
-func ProcessFrame(delta: float) -> PlayerState:
+
+func ExitState():
+	pass
+
+
+func Update(delta: float):
+	# Set the state label
 	Player.StateLabel.text = "Grounded"
-	return null
-
-func ProcessPhysics(delta: float) -> PlayerState:
+	
+	# Allow the player to jump
+	Player.canJump = true
+	
 	# Get the input direction
 	var inputDirection = Input.get_axis("MoveLeft", "MoveRight")
 	
@@ -23,15 +25,18 @@ func ProcessPhysics(delta: float) -> PlayerState:
 	else:
 		Player.velocity.x = move_toward(Player.velocity.x, 0, Player.SPEED)
 	
+	# Handle jump
+	if (Player.jumpInputPressed && Player.canJump):
+		Player.ChangeState(STATES.JUMP)
+	
 	HandleAnimations()
-	Player.move_and_slide()
-	return null
+
 
 func HandleAnimations():
 	if (Player.velocity.x != 0):
-		animator.play("player_run")
+		Player.Animator.play("player_run")
 	if (Player.velocity.x == 0):
-		animator.play("player_idle")
+		Player.Animator.play("player_idle")
 	
 	# Set the x-scale
 	Player.Sprite.scale.x = Player.Facing

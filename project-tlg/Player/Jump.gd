@@ -1,21 +1,21 @@
 class_name Jump extends PlayerState
 
-@export var grounded: PlayerState
-@export var fall: PlayerState
-
-func Enter() -> void:
-	super()
+func EnterState():
 	Player.velocity.y = Player.JUMP_VELOCITY
 
-func ProcessFrame(delta: float) -> PlayerState:
-	Player.StateLabel.text = "Jump"
-	return null
 
-func ProcessPhysics(delta: float) -> PlayerState:
+func ExitState():
+	pass
+
+
+func Update(delta: float):
+	# Set the state label
+	Player.StateLabel.text = "Jump"
+	
 	Player.velocity.y += Player.GRAVITY * delta
 	
-	if Player.velocity.y >= 0:
-		return fall
+	if (Player.velocity.y > 0):
+		Player.ChangeState(STATES.FALL)
 	
 	# Get the input direction
 	var inputDirection = Input.get_axis("MoveLeft", "MoveRight")
@@ -26,16 +26,11 @@ func ProcessPhysics(delta: float) -> PlayerState:
 	else:
 		Player.velocity.x = move_toward(Player.velocity.x, 0, Player.SPEED)
 	
-	Player.move_and_slide()
 	HandleAnimations()
-	
-	if (Player.is_on_floor()):
-		return grounded
-	
-	return null
-	
+
+
 func HandleAnimations():
-	animator.play("player_jump_up")
+	Player.Animator.play("player_jump_up")
 		
 	# Handle x-scale
 	Player.Sprite.scale.x = Player.Facing

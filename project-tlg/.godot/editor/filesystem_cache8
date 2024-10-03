@@ -1,8 +1,8 @@
 6dcd580d9bf2a9dbe66cc9f994d3620b
-::res://::1727796531
+::res://::1727814883
 GLOBALS.gd::GDScript::-1::1727791216::0::1::::<>Node<>::
 icon.svg::CompressedTexture2D::5222258630925371220::1727558762::1727560183::1::::<><>::
-playground.tscn::PackedScene::1562893813655084672::1727796531::0::1::::<><>::uid://byqcrhyj02n5d::::res://World/BraveSoul-Tiles-Stone.png<>uid://cu3iaojant8rw::::res://Player/Player.tscn
+playground.tscn::PackedScene::1562893813655084672::1727814279::0::1::::<><>::uid://byqcrhyj02n5d::::res://World/BraveSoul-Tiles-Stone.png<>uid://cu3iaojant8rw::::res://Player/Player.tscn
 Temp Player Code.txt::TextFile::-1::1727792171::0::1::::<><>::
 ::res://addons/::1727558762
 ::res://addons/AsepriteWizard/::1727558762
@@ -295,15 +295,16 @@ arena.tscn::PackedScene::3666746702453313196::1727558762::0::1::::<><>::uid://65
 clouds.tscn::PackedScene::251445743943461306::1727558762::0::1::::<><>::uid://65b6yuobhxf8::::res://demo/assets/env_clouds.png
 code_edit.gd::GDScript::-1::1727558762::0::1::::<>CodeEdit<>::
 toggle_fullscreen.gd::GDScript::-1::1727558762::0::1::::<>Button<>::
-::res://Player/::1727796531
-Airborn.gd::GDScript::-1::1727796561::0::1::::Falling<>PlayerState<>::
-Grounded.gd::GDScript::-1::1727796220::0::1::::Grounded<>PlayerState<>::
+::res://Player/::1727814279
+Fall.gd::GDScript::-1::1727797938::0::1::::Fall<>PlayerState<>::
+Grounded.gd::GDScript::-1::1727796632::0::1::::Grounded<>PlayerState<>::
+Jump.gd::GDScript::-1::1727797746::0::1::::Jump<>PlayerState<>::
 Locked.gd::GDScript::-1::1727793108::0::1::::Locked<>PlayerState<>::
 Player.gd::GDScript::-1::1727795551::0::1::::PlayerController<>CharacterBody2D<>::
-Player.tscn::PackedScene::6234907302450954884::1727796561::0::1::::<><>::res://Player/Player.gd<>uid://dtmfsjdxqf3vf::::res://Player/Images/TLG-Player-Animations-Clothed-Sheet-RAW.png<>res://Player/StateMachine.gd<>res://Player/PlayerState.gd<>res://Player/Grounded.gd<>res://Player/Airborn.gd<>res://Player/Locked.gd<>res://Player/Jump.gd
+Player.tscn::PackedScene::6234907302450954884::1727814279::0::1::::<><>::res://Player/Player.gd<>uid://dtmfsjdxqf3vf::::res://Player/Images/TLG-Player-Animations-Clothed-Sheet-RAW.png<>res://Player/StateMachine.gd<>res://Player/STATES.gd<>res://Player/PlayerState.gd<>res://Player/Grounded.gd<>res://Player/Fall.gd<>res://Player/Locked.gd<>res://Player/Jump.gd
 PlayerState.gd::GDScript::-1::1727796257::0::1::::PlayerState<>Node<>::
-Jump.gd::GDScript::-1::1727796503::0::1::::Jump<>PlayerState<>::
 StateMachine.gd::GDScript::-1::1727795593::0::1::::<>Node<>::
+STATES.gd::GDScript::-1::1727814278::0::1::::<>Node<>::
 ::res://Player/Images/::1727790126
 TLG-Player-Animations-Clothed-Sheet-RAW.png::CompressedTexture2D::8517958820915946503::1727787701::1727790126::1::::<><>::
 ::res://World/::1727560184

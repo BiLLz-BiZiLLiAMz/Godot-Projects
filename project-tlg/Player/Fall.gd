@@ -1,15 +1,17 @@
-class_name Fall extends PlayerState
+extends PlayerState
 
-@export var grounded: PlayerState
+func EnterState():
+	pass
 
-func ProcessInput(event: InputEvent) -> PlayerState:
-	return null
 
-func ProcessFrame(delta: float) -> PlayerState:
-	Player.StateLabel.text = "Airborn"
-	return null
+func ExitState():
+	pass
 
-func ProcessPhysics(delta: float) -> PlayerState:
+
+func Update(delta: float):
+	# Set the label
+	Player.StateLabel.text = "Fall"
+	
 	Player.velocity.y += Player.GRAVITY * delta
 	
 	# Get the input direction
@@ -25,13 +27,12 @@ func ProcessPhysics(delta: float) -> PlayerState:
 	HandleAnimations()
 	
 	if (Player.is_on_floor()):
-		return grounded
+		Player.ChangeState(STATES.GROUNDED)
 	else:
-		return null
-	return null
-	
+		pass
+
 func HandleAnimations():
-	animator.play("player_fall")
+	Player.Animator.play("player_fall")
 		
 	# Handle x-scale
 	Player.Sprite.scale.x = Player.Facing
