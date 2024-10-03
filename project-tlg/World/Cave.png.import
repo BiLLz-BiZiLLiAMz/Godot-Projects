@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byqcrhyj02n5d"
-path="res://.godot/imported/BraveSoul-Tiles-Stone.png-570fddc32284980b93f348599854f88e.ctex"
+uid="uid://oa62630jijep"
+path="res://.godot/imported/Cave.png-4bcb4d4b2949712c960e638f93490d07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/BraveSoul-Tiles-Stone.png"
-dest_files=["res://.godot/imported/BraveSoul-Tiles-Stone.png-570fddc32284980b93f348599854f88e.ctex"]
+source_file="res://World/Cave.png"
+dest_files=["res://.godot/imported/Cave.png-4bcb4d4b2949712c960e638f93490d07.ctex"]
 
 [params]
 

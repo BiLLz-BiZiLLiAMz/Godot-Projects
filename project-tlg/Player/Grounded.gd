@@ -25,9 +25,26 @@ func Update(delta: float):
 	else:
 		Player.velocity.x = move_toward(Player.velocity.x, 0, Player.SPEED)
 	
+	
 	# Handle jump
 	if (Player.jumpInputPressed && Player.canJump):
 		Player.ChangeState(STATES.JUMP)
+	
+	
+	# Handle rolling
+	if (Player.rollInput):
+		if (Player.velocity.x != 0):
+			# Moving roll
+			
+			pass
+		else:
+			# Still roll
+			
+			pass
+	
+	# See if we walked off a ledge
+	if (!Player.is_on_floor()):
+		Player.ChangeState(STATES.FALL)
 	
 	HandleAnimations()
 

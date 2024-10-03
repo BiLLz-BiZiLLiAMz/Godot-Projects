@@ -28,9 +28,10 @@ var movementInput = Vector2.ZERO
 var jumpInput = false
 var jumpInputPressed = false
 var climbInput = false 
+var rollInput = false
 var dashInput = false
 
-var canJump = false;
+var canJump = false
 var canDash = false
 
 #endregion
@@ -55,20 +56,20 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
+	# Player input
 	PlayerInput()
 	
-	#ChangeState(currentState.Update(delta))
+	# Update the current state
 	currentState.Update(delta)
-	
 	StateLabel.text = str(currentState.get_name())
 	
+	# Commit movement
 	move_and_slide()
 
 
 func Gravity(delta):
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
-		
 
 
 func ChangeState(nextState):
@@ -113,6 +114,12 @@ func PlayerInput():
 		jumpInputPressed = true
 	else: 
 		jumpInputPressed = false
+	
+	# Roll
+	if (Input.is_action_pressed("Roll")):
+		rollInput = true
+	else:
+		rollInput = false
 	
 	#climb
 	if Input.is_action_pressed("Climb"):

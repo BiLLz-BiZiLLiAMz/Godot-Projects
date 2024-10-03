@@ -10,18 +10,12 @@ func ExitState():
 
 func Update(delta: float):
 	# Set the label
-	Player.StateLabel.text = "Fall"
+	Player.StateLabel.text = "Still Roll"
 	
 	Player.velocity.y += Player.GRAVITY * delta
 	
 	# Get the input direction
 	var inputDirection = Input.get_axis("MoveLeft", "MoveRight")
-	
-	# Get the horizontal input direction
-	if (inputDirection):
-		Player.velocity.x = inputDirection * Player.SPEED
-	else:
-		Player.velocity.x = move_toward(Player.velocity.x, 0, Player.SPEED)
 
 	HandleAnimations()
 	
@@ -31,7 +25,7 @@ func Update(delta: float):
 		pass
 
 func HandleAnimations():
-	Player.Animator.play("player_fall")
+	Player.Animator.play("player_still_roll")
 		
 	# Handle x-scale
 	Player.Sprite.scale.x = Player.Facing

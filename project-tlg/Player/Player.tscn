@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cu3iaojant8rw"]
+[gd_scene load_steps=27 format=3 uid="uid://cu3iaojant8rw"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_7pc3d"]
 [ext_resource type="Texture2D" uid="uid://dtmfsjdxqf3vf" path="res://Player/Images/TLG-Player-Animations-Clothed-Sheet-RAW.png" id="2_8w3vv"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://Player/Fall.gd" id="6_gp8qk"]
 [ext_resource type="Script" path="res://Player/Locked.gd" id="7_7wcwd"]
 [ext_resource type="Script" path="res://Player/Jump.gd" id="7_s4nwx"]
+[ext_resource type="Script" path="res://Player/StandingRoll.gd" id="9_lb5fi"]
+[ext_resource type="Script" path="res://Player/MovingRoll.gd" id="10_ngo26"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3kol"]
 size = Vector2(9.25, 38.5)
@@ -328,6 +330,85 @@ tracks/2/keys = {
 "values": [Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_vkbva"]
+resource_name = "player_still_roll"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [35, 36, 37, 38, 39]
+}
+
+[sub_resource type="Animation" id="Animation_dkrxa"]
+resource_name = "player_moving_roll"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [29, 30, 31, 32, 33, 34]
+}
+
+[sub_resource type="Animation" id="Animation_gf4ri"]
+resource_name = "player_wall_land"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [22, 23, 24]
+}
+
+[sub_resource type="Animation" id="Animation_6k8l8"]
+resource_name = "player_wall_idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [26, 27]
+}
+
+[sub_resource type="Animation" id="Animation_ce4i1"]
+resource_name = "player_wall_jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [28]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1f3nk"]
 _data = {
 "RESET": SubResource("Animation_7f16p"),
@@ -336,9 +417,17 @@ _data = {
 "player_idle": SubResource("Animation_u7464"),
 "player_jump_transition": SubResource("Animation_nqt0r"),
 "player_jump_up": SubResource("Animation_qi8ha"),
+"player_moving_roll": SubResource("Animation_dkrxa"),
 "player_run": SubResource("Animation_yoqgp"),
-"player_still": SubResource("Animation_5ry21")
+"player_still": SubResource("Animation_5ry21"),
+"player_still_roll": SubResource("Animation_vkbva"),
+"player_wall_idle": SubResource("Animation_6k8l8"),
+"player_wall_jump": SubResource("Animation_ce4i1"),
+"player_wall_land": SubResource("Animation_gf4ri")
 }
+
+[sub_resource type="LabelSettings" id="LabelSettings_kb5mh"]
+font_size = 10
 
 [node name="PlayerController" type="CharacterBody2D"]
 floor_snap_length = 3.0
@@ -368,6 +457,38 @@ drag_left_margin = 0.15
 drag_right_margin = 0.15
 drag_bottom_margin = 0.15
 
+[node name="StateLabel" type="Label" parent="."]
+offset_left = -30.0
+offset_top = -43.0
+offset_right = 31.0
+offset_bottom = -20.0
+label_settings = SubResource("LabelSettings_kb5mh")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="TopRight" type="RayCast2D" parent="Raycasts"]
+position = Vector2(6, -7)
+target_position = Vector2(5, 0)
+
+[node name="TopLeft" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-4, -7)
+target_position = Vector2(-5, 0)
+
+[node name="BottomRight" type="RayCast2D" parent="Raycasts"]
+position = Vector2(6, 30)
+target_position = Vector2(5, 0)
+
+[node name="BottomLeft" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-4, 30)
+target_position = Vector2(-5, 0)
+
 [node name="STATES" type="Node" parent="."]
 script = ExtResource("4_p3xan")
 
@@ -386,21 +507,8 @@ script = ExtResource("6_gp8qk")
 [node name="Jump" type="Node" parent="STATES"]
 script = ExtResource("7_s4nwx")
 
-[node name="StateLabel" type="Label" parent="."]
-offset_left = -30.0
-offset_top = -43.0
-offset_right = 31.0
-offset_bottom = -20.0
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
+[node name="StillRoll" type="Node" parent="STATES"]
+script = ExtResource("9_lb5fi")
 
-[node name="Raycasts" type="Node2D" parent="."]
-
-[node name="TopRight" type="RayCast2D" parent="Raycasts"]
-
-[node name="TopLeft" type="RayCast2D" parent="Raycasts"]
-
-[node name="BottomRight" type="RayCast2D" parent="Raycasts"]
-
-[node name="BottomLeft" type="RayCast2D" parent="Raycasts"]
+[node name="MovingRoll" type="Node" parent="STATES"]
+script = ExtResource("10_ngo26")

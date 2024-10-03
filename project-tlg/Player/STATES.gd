@@ -4,7 +4,8 @@ extends Node
 @onready var GROUNDED = $Grounded
 @onready var JUMP = $Jump
 @onready var FALL = $Fall
-#@onready var CLIMB = $CLIMB
+@onready var STILL_ROLL = $StillRoll
+@onready var MOVING_ROLL = $MovingRoll
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
