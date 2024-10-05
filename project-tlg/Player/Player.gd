@@ -6,8 +6,10 @@ class_name PlayerController extends CharacterBody2D
 @onready var Animator = $Animator
 @onready var Sprite = $Sprite
 @onready var Camera = $Camera
-@onready var StateMachine = $StateMachine
-@onready var StateLabel = $StateLabel
+@onready var StateLabel = $DebugDisplay/StateLabel
+@onready var CoyoteTimer = $CoyoteTimer
+@onready var JumpBuffer = $JumpInputBufferTimer
+@onready var DebugLabel = $DebugDisplay/DebugLabel
 
 # State Machine
 @onready var STATES = $STATES
@@ -19,8 +21,14 @@ class_name PlayerController extends CharacterBody2D
 
 # Player movement
 const SPEED = 160
+const Acceleration = 50
+const MaxXSpeed = 160
+
+const Gravity = 600 #ProjectSettings.get_setting("physics/2d/default_gravity")
+const GravityFall = 700
 const JUMP_VELOCITY = -290.0
-var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
+const VariableJumpMultiplier = 0.5
+
 var Facing
 var SpriteXScale
 
@@ -31,8 +39,11 @@ var jumpInputPressed = false
 var climbInput = false 
 var rollInput = false
 var dashInput = false
+var CoyoteTime = 0.10;
+var isJumpInputBuffered = false
+var jumpInputBufferTime = 0.5
 
-var canJump = false
+var canJump = true
 var canDash = false
 
 #endregion
@@ -40,6 +51,9 @@ var canDash = false
 # State Machine
 var currentState = null
 var previousState = null
+
+# Debug
+var currentStateDebug = "NULL"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -66,11 +80,10 @@ func _physics_process(delta):
 	
 	# Commit movement
 	move_and_slide()
-
-
-func Gravity(delta):
-	if not is_on_floor():
-		velocity.y += GRAVITY * delta
+	
+	# Debug info
+	StateLabel.text = "State: " + currentStateDebug
+	DebugLabel.text = "Jump Buffer Time: " + str('%.2f' % JumpBuffer.time_left)
 
 
 func ChangeState(nextState):
@@ -129,7 +142,7 @@ func PlayerInput():
 		climbInput = false
 	
 	#dash
-	if Input.is_action_just_pressed("Dash"):
-		dashInput = true
-	else: 
-		dashInput = false
+	#if Input.is_action_just_pressed("Dash"):
+		#dashInput = true
+	#else: 
+		#dashInput = false

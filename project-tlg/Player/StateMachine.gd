@@ -4,6 +4,9 @@ extends Node
 @export var startingState: PlayerState
 var currentState: PlayerState
 
+func _ready():
+	pass
+
 # Initialize the state machine by giving each child state a reference to the
 # parent object it belongs to and enter the default starting_state.
 func Init(player: PlayerController) -> void:

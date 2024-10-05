@@ -250,6 +250,22 @@ tracks/2/keys = {
 "values": [Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_dkrxa"]
+resource_name = "player_moving_roll"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [29, 30, 31, 32, 33, 34]
+}
+
 [sub_resource type="Animation" id="Animation_yoqgp"]
 resource_name = "player_run"
 length = 0.8
@@ -346,38 +362,6 @@ tracks/0/keys = {
 "values": [35, 36, 37, 38, 39]
 }
 
-[sub_resource type="Animation" id="Animation_dkrxa"]
-resource_name = "player_moving_roll"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [29, 30, 31, 32, 33, 34]
-}
-
-[sub_resource type="Animation" id="Animation_gf4ri"]
-resource_name = "player_wall_land"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [22, 23, 24]
-}
-
 [sub_resource type="Animation" id="Animation_6k8l8"]
 resource_name = "player_wall_idle"
 loop_mode = 1
@@ -409,6 +393,22 @@ tracks/0/keys = {
 "values": [28]
 }
 
+[sub_resource type="Animation" id="Animation_gf4ri"]
+resource_name = "player_wall_land"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [22, 23, 24]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1f3nk"]
 _data = {
 "RESET": SubResource("Animation_7f16p"),
@@ -428,6 +428,7 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_kb5mh"]
 font_size = 10
+font_color = Color(1, 0, 0, 1)
 
 [node name="PlayerController" type="CharacterBody2D"]
 floor_snap_length = 3.0
@@ -457,18 +458,12 @@ drag_left_margin = 0.15
 drag_right_margin = 0.15
 drag_bottom_margin = 0.15
 
-[node name="StateLabel" type="Label" parent="."]
-offset_left = -30.0
-offset_top = -43.0
-offset_right = 31.0
-offset_bottom = -20.0
-label_settings = SubResource("LabelSettings_kb5mh")
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.2
+one_shot = true
+
+[node name="JumpInputBufferTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="Raycasts" type="Node2D" parent="."]
@@ -512,3 +507,29 @@ script = ExtResource("9_lb5fi")
 
 [node name="MovingRoll" type="Node" parent="STATES"]
 script = ExtResource("10_ngo26")
+
+[node name="DebugDisplay" type="Label" parent="."]
+
+[node name="StateLabel" type="Label" parent="DebugDisplay"]
+offset_left = -30.0
+offset_top = -31.0
+offset_right = 31.0
+offset_bottom = -16.0
+text = "STATE"
+label_settings = SubResource("LabelSettings_kb5mh")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="DebugLabel" type="Label" parent="DebugDisplay"]
+offset_left = -34.0
+offset_top = -45.0
+offset_right = 35.0
+offset_bottom = -30.0
+text = "Coyote"
+label_settings = SubResource("LabelSettings_kb5mh")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[connection signal="timeout" from="CoyoteTimer" to="STATES/Fall" method="_on_coyote_timer_timeout"]

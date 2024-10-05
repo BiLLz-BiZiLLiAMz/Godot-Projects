@@ -1,6 +1,7 @@
 class_name Jump extends PlayerState
 
 func EnterState():
+	Player.isJumpInputBuffered = false
 	Player.velocity.y = Player.JUMP_VELOCITY
 
 
@@ -10,15 +11,20 @@ func ExitState():
 
 func Update(delta: float):
 	# Set the state label
-	Player.StateLabel.text = "Jump"
+	Player.currentStateDebug = "Jump"
 	
-	Player.velocity.y += Player.GRAVITY * delta
+	Player.velocity.y += Player.Gravity * delta
 	
 	if (Player.velocity.y > 0):
 		Player.ChangeState(STATES.FALL)
 	
 	# Get the input direction
 	var inputDirection = Input.get_axis("MoveLeft", "MoveRight")
+	
+	# See if the jump key is held, if not, slash the momentum
+	if (!Input.is_action_pressed("Jump")):
+		Player.velocity.y *= Player.VariableJumpMultiplier
+		Player.ChangeState(STATES.FALL)
 	
 	# Get the horizontal input direction
 	if (inputDirection):

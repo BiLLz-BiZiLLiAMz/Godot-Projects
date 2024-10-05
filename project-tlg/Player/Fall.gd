@@ -1,7 +1,12 @@
 extends PlayerState
 
 func EnterState():
-	pass
+	# Check if we can jump then start the coyote timer
+	if Player.previousState == STATES.GROUNDED:
+		Player.canJump = true
+		Player.CoyoteTimer.start(Player.CoyoteTime)
+	else: 
+		Player.canJump = false
 
 
 func ExitState():
@@ -10,10 +15,19 @@ func ExitState():
 
 func Update(delta: float):
 	# Set the label
-	Player.StateLabel.text = "Fall"
+	Player.currentStateDebug = "Fall"
 	
-	Player.velocity.y += Player.GRAVITY * delta
+	Player.velocity.y += Player.GravityFall * delta
 	
+	# Handle coyote jump
+	if (Player.jumpInputPressed):
+		#  See if we are coyote jumping
+		if (Player.canJump):
+			Player.ChangeState(STATES.JUMP)
+		
+		# Start the input buffer timer
+		Player.JumpBuffer.start(Player.jumpInputBufferTime)
+		
 	# Get the input direction
 	var inputDirection = Input.get_axis("MoveLeft", "MoveRight")
 	
@@ -27,8 +41,6 @@ func Update(delta: float):
 	
 	if (Player.is_on_floor()):
 		Player.ChangeState(STATES.GROUNDED)
-	else:
-		pass
 
 
 func HandleAnimations():
@@ -36,3 +48,7 @@ func HandleAnimations():
 		
 	# Handle x-scale
 	Player.Sprite.scale.x = Player.Facing
+
+
+func _on_coyote_timer_timeout() -> void:
+	Player.canJump = false
