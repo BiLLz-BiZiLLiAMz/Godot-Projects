@@ -6,6 +6,8 @@ extends Node
 @onready var FALL = $Fall
 @onready var STILL_ROLL = $StillRoll
 @onready var MOVING_ROLL = $MovingRoll
+@onready var CLIMB = $Climb
+@onready var WALL_JUMP = $WallJump
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,5 +15,6 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
+	@warning_ignore("unused_parameter")
 	pass

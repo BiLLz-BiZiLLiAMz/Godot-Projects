@@ -5,3 +5,9 @@ res://Player/Grounded.gd
 res://playground.tscn
 res://Player/Jump.gd
 res://Player/StateMachine.gd
+res://Player/Climb.gd
+res://Player/MovingRoll.gd
+res://Player/StandingRoll.gd
+res://Player/WallJump.gd
+res://Player/STATES.gd
+res://Player/PlayerState.gd

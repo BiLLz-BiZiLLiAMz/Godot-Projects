@@ -1,7 +1,8 @@
 extends PlayerState
 
 func EnterState():
-	pass
+	# Set the label
+	Player.StateLabel.text = "Moving Roll"
 
 
 func ExitState():
@@ -9,20 +10,15 @@ func ExitState():
 
 
 func Update(delta: float):
-	# Set the label
-	Player.StateLabel.text = "Still Roll"
-	
-	Player.velocity.y += Player.GRAVITY * delta
-	
-	# Get the input direction
-	var inputDirection = Input.get_axis("MoveLeft", "MoveRight")
-
+	# Handle state physics
+	Player.velocity.y += Player.Gravity * delta
+	HandleMovingRoll()
 	HandleAnimations()
-	
-	if (Player.is_on_floor()):
-		Player.ChangeState(STATES.GROUNDED)
-	else:
-		pass
+
+
+func HandleMovingRoll():
+	pass
+
 
 func HandleAnimations():
 	Player.Animator.play("player_still_roll")

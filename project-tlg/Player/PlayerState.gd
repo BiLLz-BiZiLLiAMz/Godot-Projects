@@ -13,6 +13,7 @@ func ExitState():
 
 
 func Update(delta):
+	@warning_ignore("unused_parameter")
 	return null
 
 #func PlayerMovement():

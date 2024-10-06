@@ -1,6 +1,9 @@
 extends PlayerState
 
 func EnterState():
+	# Set the label
+	Player.currentStateDebug = "Fall"
+	
 	# Check if we can jump then start the coyote timer
 	if Player.previousState == STATES.GROUNDED:
 		Player.canJump = true
@@ -14,11 +17,24 @@ func ExitState():
 
 
 func Update(delta: float):
-	# Set the label
-	Player.currentStateDebug = "Fall"
-	
+	# Handle state physics
 	Player.velocity.y += Player.GravityFall * delta
-	
+	HandleCoyoteJumping()
+	Player.HandleHorizontalMovement()
+	HandleLanding()
+	HandleClimb()
+	HandleWallJump()
+	HandleAnimations()
+
+
+func HandleAnimations():
+	Player.Animator.play("player_fall")
+		
+	# Handle x-scale
+	Player.Sprite.scale.x = Player.Facing
+
+
+func HandleCoyoteJumping():
 	# Handle coyote jump
 	if (Player.jumpInputPressed):
 		#  See if we are coyote jumping
@@ -27,27 +43,24 @@ func Update(delta: float):
 		
 		# Start the input buffer timer
 		Player.JumpBuffer.start(Player.jumpInputBufferTime)
-		
-	# Get the input direction
-	var inputDirection = Input.get_axis("MoveLeft", "MoveRight")
-	
-	# Get the horizontal input direction
-	if (inputDirection):
-		Player.velocity.x = inputDirection * Player.SPEED
-	else:
-		Player.velocity.x = move_toward(Player.velocity.x, 0, Player.SPEED)
 
-	HandleAnimations()
-	
+
+func HandleLanding():
 	if (Player.is_on_floor()):
 		Player.ChangeState(STATES.GROUNDED)
 
 
-func HandleAnimations():
-	Player.Animator.play("player_fall")
-		
-	# Handle x-scale
-	Player.Sprite.scale.x = Player.Facing
+func HandleClimb():
+	# See if we are against a wall
+	if (Player.GetNextToWall()):
+		if (Player.climbInput):
+			Player.ChangeState(STATES.CLIMB)
+
+func HandleWallJump():
+	if (Player.GetNextToWall() and Player.jumpInputPressed):
+		print("WALL JUMP")
+		Player.ChangeState(STATES.WALL_JUMP)
+
 
 
 func _on_coyote_timer_timeout() -> void:

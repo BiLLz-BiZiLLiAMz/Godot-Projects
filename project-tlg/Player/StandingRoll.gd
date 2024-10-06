@@ -1,31 +1,31 @@
 extends PlayerState
 
 func EnterState():
-	pass
-
+	# Set the label
+	Player.StateLabel.text = "Standing Roll"
+	Player.velocity.x = Player.StandingRollSpeed * Player.Facing
 
 func ExitState():
 	pass
 
 
 func Update(delta: float):
-	# Set the label
-	Player.StateLabel.text = "Still Roll"
-	
-	Player.velocity.y += Player.GRAVITY * delta
-	
-	# Get the input direction
-	var inputDirection = Input.get_axis("MoveLeft", "MoveRight")
-
+	# Handle state physics
+	Player.velocity.y += Player.Gravity * delta
+	HandleStandingRoll()
 	HandleAnimations()
-	
-	if (Player.is_on_floor()):
-		Player.ChangeState(STATES.GROUNDED)
-	else:
-		pass
+
+
+func HandleStandingRoll():
+	pass
+
 
 func HandleAnimations():
-	Player.Animator.play("player_still_roll")
-		
+	Player.Animator.play("player_still_roll")	
 	# Handle x-scale
 	Player.Sprite.scale.x = Player.Facing
+
+
+func _on_animator_animation_finished(anim_name: StringName) -> void:
+	Player.velocity.x = 0
+	Player.ChangeState(STATES.GROUNDED)
