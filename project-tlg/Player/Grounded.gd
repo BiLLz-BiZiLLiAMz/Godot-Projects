@@ -4,7 +4,7 @@ extends PlayerState
 func EnterState():
 	# Set the state label
 	Player.currentStateDebug = "Grounded"
-	
+	Player.hasStamina = true
 
 
 func ExitState():

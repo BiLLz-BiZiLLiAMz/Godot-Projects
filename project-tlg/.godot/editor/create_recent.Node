@@ -1,11 +1,12 @@
-Node
+Camera2D
+CameraController
 Label
+Node
 Timer
 RayCast2D
 Node2D
 BTState
 AnimationPlayer
-Camera2D
 Sprite2D
 TileMapLayer
 TileMap

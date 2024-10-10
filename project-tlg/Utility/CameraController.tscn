@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh1ed47s0ujiq"]
+
+[ext_resource type="Script" path="res://Utility/CameraController.gd" id="1_b8l8w"]
+[ext_resource type="Script" path="res://Utility/CameraStates.gd" id="2_7e7uu"]
+
+[node name="Camera" type="Camera2D"]
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+script = ExtResource("1_b8l8w")
+
+[node name="StateLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="STATES" type="Node" parent="."]
+script = ExtResource("2_7e7uu")
+
+[node name="Locked" type="Node" parent="STATES"]
+
+[node name="Follow" type="Node" parent="STATES"]

@@ -2,6 +2,8 @@ extends PlayerState
 
 var hasStamina
 var canClimb = true
+var canClimbUp = true
+var canClimbDown = true
 
 func EnterState():
 	# Set the state label
@@ -39,14 +41,30 @@ func HandleClimb():
 	Player.UpdateRaycasts()
 	if (Player.wallClimbDirection > 0): # Wall is right
 		# See if top raycast is no longer colliding
-		if (!Player.RCTopRight.is_colliding()):
+		if (Player.RCTopRight.is_colliding()):
 			# Not colliding so jump onto the platform
-			canClimb = false
+			canClimbUp = true
+		else:
+			canClimbUp = false
+		
+		if (Player.RCBottomRight.is_colliding()):
+			# Not colliding so jump onto the platform
+			canClimbDown = true
+		else:
+			canClimbDown = false
 	else:
 		# See if top raycast is no longer colliding
 		if (!Player.RCTopLeft.is_colliding()):
 			# Not colliding so jump onto the platform
-			canClimb = false
+			canClimbUp = false
+		else:
+			canClimbUp = true
+		
+		if (!Player.RCBottomLeft.is_colliding()):
+			# Not colliding so jump onto the platform
+			canClimbDown = false
+		else:
+			canClimbDown = true
 	
 	# See if the player has let go of the climb key
 	if (!Player.climbInput):
@@ -54,19 +72,22 @@ func HandleClimb():
 	
 	# See if we are on the ground
 	if (Player.is_on_floor()):
-		Player.ChangeState(STATES.FALL)
+		Player.ChangeState(STATES.GROUNDED)
 	
 	# Handle climbing up and down
-	var climbDirection = Input.get_axis("MoveUp", "MoveDown")
-	if (canClimb):
-		Player.velocity.y = climbDirection * Player.ClimbSpeed
+	if (Input.is_action_pressed("MoveUp") and canClimbUp):
+		Player.velocity.y = -Player.ClimbSpeed
+	elif (Input.is_action_pressed("MoveDown") and canClimbDown):
+		Player.velocity.y = Player.ClimbSpeed
 	else:
 		Player.velocity.y = 0
-
+		
 func HandleWallJump():
 	if(Player.jumpInputPressed):
 		Player.ChangeState(STATES.WALL_JUMP)
 
 
-func _OnStaminaTimerTimeout() -> void:
+func _on_stamina_timer_timeout() -> void:
+	print("NO MORE STAMINA")
 	Player.ChangeState(STATES.FALL)
+	Player.hasStamina = false

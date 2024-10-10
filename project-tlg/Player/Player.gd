@@ -58,6 +58,7 @@ var jumpInputPressed = false
 var climbInput = false 
 var climbUp = false
 var climbDown = false
+var hasStamina = false
 var rollInput = false
 var dashInput = false
 var CoyoteTime = 0.10;

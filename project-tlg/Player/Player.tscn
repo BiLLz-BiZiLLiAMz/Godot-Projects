@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://cu3iaojant8rw"]
+[gd_scene load_steps=30 format=3 uid="uid://cu3iaojant8rw"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_7pc3d"]
 [ext_resource type="Texture2D" uid="uid://dtmfsjdxqf3vf" path="res://Player/Images/TLG-Player-Animations-Clothed-Sheet-RAW.png" id="2_8w3vv"]
+[ext_resource type="Script" path="res://Utility/CameraController.gd" id="3_j3woy"]
 [ext_resource type="Script" path="res://Player/STATES.gd" id="4_p3xan"]
 [ext_resource type="Script" path="res://Player/PlayerState.gd" id="4_x521j"]
 [ext_resource type="Script" path="res://Player/Grounded.gd" id="5_kmrad"]
@@ -582,15 +583,9 @@ libraries = {
 "": SubResource("AnimationLibrary_1f3nk")
 }
 
-[node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-position_smoothing_speed = 3.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.15
-drag_right_margin = 0.15
-drag_bottom_margin = 0.15
+[node name="CameraController" type="Camera2D" parent="." node_paths=PackedStringArray("followTarget")]
+script = ExtResource("3_j3woy")
+followTarget = NodePath("..")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -659,6 +654,7 @@ script = ExtResource("12_ah7dx")
 [node name="DebugDisplay" type="Label" parent="."]
 
 [node name="StateLabel" type="Label" parent="DebugDisplay"]
+layout_mode = 0
 offset_left = -30.0
 offset_top = -31.0
 offset_right = 31.0
@@ -670,6 +666,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="DebugLabel" type="Label" parent="DebugDisplay"]
+layout_mode = 0
 offset_left = -34.0
 offset_top = -45.0
 offset_right = 35.0
@@ -682,4 +679,4 @@ uppercase = true
 
 [connection signal="animation_finished" from="Animator" to="STATES/StillRoll" method="_on_animator_animation_finished"]
 [connection signal="timeout" from="CoyoteTimer" to="STATES/Fall" method="_on_coyote_timer_timeout"]
-[connection signal="timeout" from="JumpInputBufferTimer" to="STATES/Climb" method="_OnStaminaTimerTimeout"]
+[connection signal="timeout" from="StaminaTimer" to="STATES/Climb" method="_on_stamina_timer_timeout"]

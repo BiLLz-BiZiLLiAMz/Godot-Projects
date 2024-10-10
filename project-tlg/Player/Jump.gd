@@ -45,5 +45,5 @@ func HandleJumpToFall():
 func HandleClimb():
 	# See if we are against a wall
 	if (Player.GetNextToWall()):
-		if (Player.climbInput):
+		if (Player.climbInput and Player.hasStamina):
 			Player.ChangeState(STATES.CLIMB)
