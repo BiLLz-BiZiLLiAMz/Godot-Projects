@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq32uvqolio0o"]
+
+[ext_resource type="Script" path="res://Entity/Player/Scripts/Weapons/Weapon.gd" id="1_43bw4"]
+[ext_resource type="Texture2D" uid="uid://dao7l5xexeikd" path="res://Entity/Player/Resources/Weapons/BasicPistol/BasicPistol.png" id="2_rkh26"]
+
+[node name="BasicPistol" type="Node2D" node_paths=PackedStringArray("Sprite", "Animator")]
+script = ExtResource("1_43bw4")
+Name = "Basic Pistol"
+Sprite = NodePath("Sprite")
+Animator = NodePath("Animator")
+Recoil = 1.0
+RateOfFire = 1.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_rkh26")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 96)
+
+[node name="Animator" type="AnimationPlayer" parent="."]
