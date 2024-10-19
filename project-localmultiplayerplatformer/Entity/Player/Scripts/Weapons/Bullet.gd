@@ -1,20 +1,15 @@
-class_name Bullet extends Node2D
+class_name Bullet extends Resource
+
+enum BulletTypes {
+	Straight,
+	Tracking
+}
 
 @export var Damage: float
-var Direction: Vector2
-@export var Sprite: Sprite2D
+@export var Sprite: Texture2D
 @export var Speed: float
 @export var Penetrating: bool
-@export var Collider: Area2D
+#@export var Collider: Area2D
+@export var MovementType: BulletTypes
 
-
-func _ready():
-	Collider.body_entered.connect(BulletCollided)
-
-func Update(delta):
-	position += Direction * Speed * delta
-
-
-func BulletCollided():
-	# TODO: Play bullet collision animation
-	queue_free()
+var Direction: Vector2

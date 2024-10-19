@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://csyy258hl5f2u"]
+[gd_scene load_steps=4 format=3 uid="uid://ce6tgtxbk61fx"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scripts/Weapons/Bullet.gd" id="1_1dd0c"]
 [ext_resource type="Texture2D" uid="uid://dotskfg433dei" path="res://Entity/Player/Resources/Weapons/BasicPistol/BasicPistol-Bullet.png" id="2_eqtn8"]

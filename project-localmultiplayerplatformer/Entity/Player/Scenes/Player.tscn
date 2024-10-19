@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://bfn5tr5vhw6pc"]
+[gd_scene load_steps=28 format=3 uid="uid://bfn5tr5vhw6pc"]
 
 [ext_resource type="Texture2D" uid="uid://g3occ8f5ifa4" path="res://Entity/Player/Resources/Blue.png" id="1_ixk3u"]
 [ext_resource type="Script" path="res://Entity/Player/Player.gd" id="1_rkrus"]
 [ext_resource type="Script" path="res://Entity/Player/Scripts/PlayerState/States.gd" id="2_2lfcb"]
+[ext_resource type="Script" path="res://Entity/Player/Scenes/Camera.gd" id="3_dn54q"]
 [ext_resource type="Script" path="res://Entity/Player/Scripts/PlayerState/LockedState.gd" id="4_i7c05"]
 [ext_resource type="Script" path="res://Entity/Player/Scripts/PlayerState/GroundedState.gd" id="5_reuev"]
 [ext_resource type="Script" path="res://Entity/Player/Scripts/PlayerState/JumpState.gd" id="6_eikql"]
@@ -519,17 +520,16 @@ libraries = {
 "": SubResource("AnimationLibrary_657h8")
 }
 
-[node name="Camera" type="Camera2D" parent="."]
-position_smoothing_enabled = true
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position_smoothing_speed = 4.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 drag_left_margin = 0.05
 drag_top_margin = 0.0
 drag_right_margin = 0.05
-drag_bottom_margin = 0.0
+drag_bottom_margin = 1.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
+script = ExtResource("3_dn54q")
+target = NodePath("..")
 
 [node name="PlayerStates" type="Node" parent="."]
 script = ExtResource("2_2lfcb")

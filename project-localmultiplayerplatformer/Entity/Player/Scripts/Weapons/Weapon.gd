@@ -1,12 +1,13 @@
-class_name Weapon extends Node2D
+class_name Weapon extends Resource
 
 @export var Name: String
-@export var Bullet: Bullet
-@export var Sprite: Sprite2D
-@export var Animator: AnimationPlayer
+@export var Bullet: PackedScene
+@export var Sprite: Texture2D
+#@export var Animator: AnimationPlayer
 @export var Recoil: float
-var recoilTimer = 0
 @export var RateOfFire: float
+
+var recoilTimer = 0
 
 func _ready():
 	pass

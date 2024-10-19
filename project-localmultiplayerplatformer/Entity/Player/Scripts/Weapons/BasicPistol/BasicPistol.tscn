@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dq32uvqolio0o"]
+[gd_scene load_steps=3 format=3 uid="uid://c37hwcosfupbt"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scripts/Weapons/Weapon.gd" id="1_43bw4"]
 [ext_resource type="Texture2D" uid="uid://dao7l5xexeikd" path="res://Entity/Player/Resources/Weapons/BasicPistol/BasicPistol.png" id="2_rkh26"]
 
-[node name="BasicPistol" type="Node2D" node_paths=PackedStringArray("Sprite", "Animator")]
+[node name="BasicPistol" type="Node2D"]
 script = ExtResource("1_43bw4")
 Name = "Basic Pistol"
-Sprite = NodePath("Sprite")
-Animator = NodePath("Animator")
+Sprite = Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"texture":ExtResource("2_rkh26"),"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":true,"region_rect":Rect2(0, 0, 96, 96),"region_filter_clip_enabled":false,"script":null)
+
 Recoil = 1.0
 RateOfFire = 1.0
 
