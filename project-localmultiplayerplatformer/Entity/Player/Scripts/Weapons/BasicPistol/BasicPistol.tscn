@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://ce6tgtxbk61fx" path="res://Entity/Player/Scripts/Weapons/BasicPistol/BasicBullet.tscn" id="2_4sdpi"]
 [ext_resource type="Texture2D" uid="uid://dao7l5xexeikd" path="res://Entity/Player/Resources/Weapons/BasicPistol/BasicPistol.png" id="3_vqauv"]
 
+[sub_resource type="Animation" id="Animation_ntelo"]
+resource_name = "Empty"
+
 [sub_resource type="Animation" id="Animation_lrpbt"]
 resource_name = "Idle"
 loop_mode = 1
@@ -19,6 +22,24 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+
+[sub_resource type="Animation" id="Animation_fwud3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_nikh1"]
+resource_name = "Reload"
 
 [sub_resource type="Animation" id="Animation_x1ctj"]
 resource_name = "Shoot"
@@ -48,27 +69,6 @@ tracks/1/keys = {
 "args": [],
 "method": &"ShootAnimationComplete"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_nikh1"]
-resource_name = "Reload"
-
-[sub_resource type="Animation" id="Animation_ntelo"]
-resource_name = "Empty"
-
-[sub_resource type="Animation" id="Animation_fwud3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ak5ng"]

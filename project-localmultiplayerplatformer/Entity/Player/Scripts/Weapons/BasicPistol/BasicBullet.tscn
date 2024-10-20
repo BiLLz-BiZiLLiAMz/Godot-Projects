@@ -6,11 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im2a3"]
 size = Vector2(10, 10)
 
-[node name="BasicBullet" type="Node2D" node_paths=PackedStringArray("Sprite")]
+[node name="BasicBullet" type="Node2D" node_paths=PackedStringArray("Sprite", "Collider")]
 script = ExtResource("1_1dd0c")
 Damage = 5.0
 Sprite = NodePath("Sprite")
 Speed = 20.0
+Collider = NodePath("Collider")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
@@ -19,10 +20,9 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Collider" type="Area2D" parent="."]
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
 position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_im2a3")
 debug_color = Color(1, 0, 0, 0.419608)
-
-[connection signal="body_entered" from="Collider" to="." method="OnColliderAreaEntered"]

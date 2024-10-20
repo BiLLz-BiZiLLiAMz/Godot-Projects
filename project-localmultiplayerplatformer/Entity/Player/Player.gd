@@ -29,10 +29,10 @@ class_name PlayerController extends CharacterBody2D
 #######################################################################
 
 # Player Horizontal Movement
-const MoveSpeed = 480
-const SlideSpeedMultiplier = 1.2
+const RunSpeed = 480
+const SlideSpeed = 700
+var MoveSpeed = RunSpeed
 const Acceleration = 100
-const MaxXSpeed = MoveSpeed
 
 # Player Jumping
 #const Gravity = Globals.Gravity
@@ -98,14 +98,13 @@ func _physics_process(delta):
 	
 	# Update the current state
 	currentState.Update(delta)
-	StateLabel.text = str("State: " + currentState.get_name())
+	StateLabel.text = "Speed: " + str(MoveSpeed)
 	
 	# Commit movement
 	move_and_slide()
 	
 	# Debug info
 	
-
 
 func ChangeState(nextState):
 	if nextState != null:
@@ -116,32 +115,10 @@ func ChangeState(nextState):
 		currentState.EnterState()
 
 
-#func GetNextToWall() -> bool:
-#
-	#
-	## Check collisions
-	#if (RCTopRight.is_colliding() and RCBottomRight.is_colliding()):
-		#wallClimbDirection = 1
-		#return true
-	#elif (RCTopLeft.is_colliding() and RCBottomLeft.is_colliding()):
-		#wallClimbDirection = -1
-		#return true
-	#else:
-		#return false
-
-
 func HandleHorizontalMovement():
 	# Get the horizontal input direction
-	var targetSpeed = MaxXSpeed * inputDirection
+	var targetSpeed = MoveSpeed * inputDirection
 	velocity.x = move_toward(velocity.x, targetSpeed, Acceleration)
-
-
-#func UpdateRaycasts():
-	## Force updates
-	#RCTopLeft.force_raycast_update()
-	#RCBottomLeft.force_raycast_update()
-	#RCTopRight.force_raycast_update()
-	#RCBottomRight.force_raycast_update()
 
 
 func PlayerInput():

@@ -48,6 +48,10 @@ func reset():
 	# also clean up when gamepads disconnect
 	if !Input.joy_connection_changed.is_connected(_on_joy_connection_changed):
 		Input.joy_connection_changed.connect(_on_joy_connection_changed)
+		
+	# Initialize already connected devices
+	for id in Input.get_connected_joypads():
+		_on_joy_connection_changed(id, true)
 
 func _on_joy_connection_changed(device: int, connected: bool):
 	if connected:

@@ -5,6 +5,7 @@ func EnterState():
 	# Set the state label
 	Player.currentStateDebug = "Grounded"
 	Player.canJump = true
+	Player.MoveSpeed = Player.RunSpeed
 
 func ExitState():
 	pass

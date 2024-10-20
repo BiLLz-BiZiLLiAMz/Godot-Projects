@@ -14,7 +14,7 @@ func _physics_process(delta):
 	HandleAnimation()
 
 func HandleFire():
-	if (MultiplayerInput.is_action_pressed(Player.Device, "Shoot")):
+	if (MultiplayerInput.is_action_just_pressed(Player.Device, "Shoot")):
 		if ((Ammo > 0) or (Ammo == -1)):
 			if (Animator.current_animation != "Shoot"):
 				# Create the bullet

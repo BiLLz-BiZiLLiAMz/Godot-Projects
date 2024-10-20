@@ -17,10 +17,8 @@ var Direction: Vector2
 func _physics_process(delta: float) -> void:
 	global_position += Direction * Speed
 	
-
-
-
-
-func OnColliderAreaEntered(area: Area2D) -> void:
-	print("COLLIDED")
-	queue_free()
+	var _overlappingBodies = Collider.get_overlapping_bodies()
+	for body in _overlappingBodies:
+		if body is TileMap:
+			print("Colliding with TileMap layer!")
+	
