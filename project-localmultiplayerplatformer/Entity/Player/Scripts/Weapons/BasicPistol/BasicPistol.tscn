@@ -1,19 +1,115 @@
-[gd_scene load_steps=3 format=3 uid="uid://c37hwcosfupbt"]
+[gd_scene load_steps=10 format=3 uid="uid://d11rv7fmryr4q"]
 
-[ext_resource type="Script" path="res://Entity/Player/Scripts/Weapons/Weapon.gd" id="1_43bw4"]
-[ext_resource type="Texture2D" uid="uid://dao7l5xexeikd" path="res://Entity/Player/Resources/Weapons/BasicPistol/BasicPistol.png" id="2_rkh26"]
+[ext_resource type="Script" path="res://Entity/Player/Scripts/Weapons/BasicPistol/BasicPistol.gd" id="1_7i7kf"]
+[ext_resource type="PackedScene" uid="uid://ce6tgtxbk61fx" path="res://Entity/Player/Scripts/Weapons/BasicPistol/BasicBullet.tscn" id="2_4sdpi"]
+[ext_resource type="Texture2D" uid="uid://dao7l5xexeikd" path="res://Entity/Player/Resources/Weapons/BasicPistol/BasicPistol.png" id="3_vqauv"]
 
-[node name="BasicPistol" type="Node2D"]
-script = ExtResource("1_43bw4")
+[sub_resource type="Animation" id="Animation_lrpbt"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_x1ctj"]
+resource_name = "Shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ShootAnimationComplete"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nikh1"]
+resource_name = "Reload"
+
+[sub_resource type="Animation" id="Animation_ntelo"]
+resource_name = "Empty"
+
+[sub_resource type="Animation" id="Animation_fwud3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ak5ng"]
+_data = {
+"Empty": SubResource("Animation_ntelo"),
+"Idle": SubResource("Animation_lrpbt"),
+"RESET": SubResource("Animation_fwud3"),
+"Reload": SubResource("Animation_nikh1"),
+"Shoot": SubResource("Animation_x1ctj")
+}
+
+[node name="BasicPistol" type="Node2D" node_paths=PackedStringArray("Sprite", "Animator", "FireLeft", "FireRight", "FireUp", "FireDown")]
+script = ExtResource("1_7i7kf")
 Name = "Basic Pistol"
-Sprite = Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"texture":ExtResource("2_rkh26"),"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":true,"region_rect":Rect2(0, 0, 96, 96),"region_filter_clip_enabled":false,"script":null)
-
-Recoil = 1.0
-RateOfFire = 1.0
+Bullet = ExtResource("2_4sdpi")
+Sprite = NodePath("Sprite")
+Animator = NodePath("Animator")
+Recoil = 2.0
+Ammo = -1
+FireLeft = NodePath("FireLeft")
+FireRight = NodePath("FireRight")
+FireUp = NodePath("FireUp")
+FireDown = NodePath("FireDown")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_rkh26")
-region_enabled = true
-region_rect = Rect2(0, 0, 96, 96)
+texture = ExtResource("3_vqauv")
+hframes = 6
 
 [node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ak5ng")
+}
+
+[node name="FireLeft" type="Marker2D" parent="."]
+position = Vector2(-43, 28)
+
+[node name="FireRight" type="Marker2D" parent="."]
+position = Vector2(43, 28)
+
+[node name="FireUp" type="Marker2D" parent="."]
+position = Vector2(0, -42)
+
+[node name="FireDown" type="Marker2D" parent="."]
+position = Vector2(0, 43)

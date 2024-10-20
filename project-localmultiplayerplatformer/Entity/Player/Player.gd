@@ -10,6 +10,7 @@ class_name PlayerController extends CharacterBody2D
 @onready var CoyoteTimer = $Timers/CoyoteTimer
 @onready var JumpBuffer = $Timers/JumpBufferTimer
 
+@export var Device: int = -1
 
 # Raycasts
 #@onready var RCTopRight = $Raycasts/TopRight
@@ -145,38 +146,38 @@ func HandleHorizontalMovement():
 
 func PlayerInput():
 	# Get the input direction
-	inputDirection = Input.get_axis("MoveLeft", "MoveRight")
+	inputDirection = MultiplayerInput.get_axis(Device, "MoveLeft", "MoveRight")
 	
 	movementInput = Vector2.ZERO
-	if Input.is_action_pressed("MoveRight"):
+	if MultiplayerInput.is_action_pressed(Device, "MoveRight"):
 		movementInput.x += 1
 		Facing = SpriteXScale
-	if Input.is_action_pressed("MoveLeft"):
+	if MultiplayerInput.is_action_pressed(Device, "MoveLeft"):
 		movementInput.x -= 1
 		Facing = -SpriteXScale
-	if Input.is_action_pressed("MoveUp"):
+	if MultiplayerInput.is_action_pressed(Device, "MoveUp"):
 		movementInput.y -= 1
-	if Input.is_action_pressed("MoveDown"):
+	if MultiplayerInput.is_action_pressed(Device, "MoveDown"):
 		movementInput.y += 1
 	
 	# jumps
-	if Input.is_action_pressed("Jump"):
+	if MultiplayerInput.is_action_pressed(Device, "Jump"):
 		jumpInput = true
 	else: 
 		jumpInput = false
-	if Input.is_action_just_pressed("Jump"):
+	if MultiplayerInput.is_action_just_pressed(Device, "Jump"):
 		jumpInputPressed = true
 	else: 
 		jumpInputPressed = false
 	
 	# Dodge
-	if (Input.is_action_just_pressed("Dodge")):
+	if (MultiplayerInput.is_action_just_pressed(Device, "Dodge")):
 		dodgeInput = true
 	else:
 		dodgeInput = false
 	
 	# Shoot
-	if (Input.is_action_just_pressed("Shoot")):
+	if (MultiplayerInput.is_action_just_pressed(Device, "Shoot")):
 		shootInput = true
 	else:
 		shootInput = false

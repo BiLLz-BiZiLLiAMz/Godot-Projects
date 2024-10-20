@@ -34,7 +34,7 @@ func HandleDodge():
 
 func HandleAnimations():
 	if (!(Player.Animator.current_animation == "AirDodge")):
-		Player.Animator.play("JumpUp")
+		Player.Animator.play("Fall")
 	Player.HandleFlipH()
 
 

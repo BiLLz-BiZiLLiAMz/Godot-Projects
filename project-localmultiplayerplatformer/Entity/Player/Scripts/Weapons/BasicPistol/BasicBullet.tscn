@@ -4,20 +4,25 @@
 [ext_resource type="Texture2D" uid="uid://dotskfg433dei" path="res://Entity/Player/Resources/Weapons/BasicPistol/BasicPistol-Bullet.png" id="2_eqtn8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im2a3"]
-size = Vector2(5, 5)
+size = Vector2(10, 10)
 
-[node name="BasicBullet" type="Node2D"]
+[node name="BasicBullet" type="Node2D" node_paths=PackedStringArray("Sprite")]
 script = ExtResource("1_1dd0c")
 Damage = 5.0
-Speed = 5.0
+Sprite = NodePath("Sprite")
+Speed = 20.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_eqtn8")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Collider" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
-position = Vector2(-0.375, 0.5)
+position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_im2a3")
+debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_eqtn8")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
+[connection signal="body_entered" from="Collider" to="." method="OnColliderAreaEntered"]

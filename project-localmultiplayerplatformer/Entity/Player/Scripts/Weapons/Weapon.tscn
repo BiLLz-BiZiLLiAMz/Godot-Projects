@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsvmqhkln5e1i"]
+
+[ext_resource type="Script" path="res://Entity/Player/Scripts/Weapons/Weapon.gd" id="1_72l70"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_72l70")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+
+[node name="FireLeft" type="Marker2D" parent="."]
+position = Vector2(-43, 28)
+
+[node name="FireRight" type="Marker2D" parent="."]
+position = Vector2(43, 28)
+
+[node name="FireUp" type="Marker2D" parent="."]
+position = Vector2(0, -42)
+
+[node name="FireDown" type="Marker2D" parent="."]
+position = Vector2(0, 43)

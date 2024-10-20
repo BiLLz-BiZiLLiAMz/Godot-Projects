@@ -1,9 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://bfn5tr5vhw6pc"]
+[gd_scene load_steps=29 format=3 uid="uid://bfn5tr5vhw6pc"]
 
 [ext_resource type="Texture2D" uid="uid://g3occ8f5ifa4" path="res://Entity/Player/Resources/Blue.png" id="1_ixk3u"]
 [ext_resource type="Script" path="res://Entity/Player/Player.gd" id="1_rkrus"]
 [ext_resource type="Script" path="res://Entity/Player/Scripts/PlayerState/States.gd" id="2_2lfcb"]
-[ext_resource type="Script" path="res://Entity/Player/Scenes/Camera.gd" id="3_dn54q"]
+[ext_resource type="Script" path="res://Entity/Player/Scripts/Camera.gd" id="3_dn54q"]
 [ext_resource type="Script" path="res://Entity/Player/Scripts/PlayerState/LockedState.gd" id="4_i7c05"]
 [ext_resource type="Script" path="res://Entity/Player/Scripts/PlayerState/GroundedState.gd" id="5_reuev"]
 [ext_resource type="Script" path="res://Entity/Player/Scripts/PlayerState/JumpState.gd" id="6_eikql"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Entity/Player/Scripts/PlayerState/DodgeState.gd" id="8_3fujk"]
 [ext_resource type="Script" path="res://Entity/Player/Scripts/PlayerState/SlideState.gd" id="9_5d8x5"]
 [ext_resource type="FontFile" uid="uid://dff70lxnqdqgr" path="res://Resources/Pixellari.ttf" id="11_kgipk"]
+[ext_resource type="PackedScene" uid="uid://d11rv7fmryr4q" path="res://Entity/Player/Scripts/Weapons/BasicPistol/BasicPistol.tscn" id="12_hep7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1rywi"]
 size = Vector2(32, 48)
@@ -554,6 +555,11 @@ script = ExtResource("8_3fujk")
 
 [node name="Slide" type="Node" parent="PlayerStates"]
 script = ExtResource("9_5d8x5")
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="BasicPistol" parent="Weapons" node_paths=PackedStringArray("Player") instance=ExtResource("12_hep7w")]
+Player = NodePath("../..")
 
 [node name="Timers" type="Node" parent="."]
 
