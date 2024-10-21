@@ -13,12 +13,16 @@ enum BulletTypes {
 @export var MovementType: BulletTypes
 
 var Direction: Vector2
+var collided = false
 
 func _physics_process(delta: float) -> void:
 	global_position += Direction * Speed
+	if (collided == true):
+		Sprite.visible = false
+		queue_free()
 	
-	var _overlappingBodies = Collider.get_overlapping_bodies()
-	for body in _overlappingBodies:
-		if body is TileMap:
-			print("Colliding with TileMap layer!")
-	
+
+
+func _on_collider_body_entered(body: Node2D) -> void:
+	Speed = 0
+	collided = true

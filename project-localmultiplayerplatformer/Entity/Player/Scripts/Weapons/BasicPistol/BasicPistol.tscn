@@ -109,7 +109,7 @@ position = Vector2(-43, 28)
 position = Vector2(43, 28)
 
 [node name="FireUp" type="Marker2D" parent="."]
-position = Vector2(0, -42)
+position = Vector2(0, -36)
 
 [node name="FireDown" type="Marker2D" parent="."]
-position = Vector2(0, 43)
+position = Vector2(0, 55)
