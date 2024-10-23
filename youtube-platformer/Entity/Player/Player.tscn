@@ -3,8 +3,21 @@
 [ext_resource type="Texture2D" uid="uid://dhv21cnwh8y4b" path="res://Resources/Character base.png" id="1_e7d54"]
 [ext_resource type="Script" path="res://Entity/Player/Player.gd" id="1_gqhxu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7phbn"]
-size = Vector2(9, 17)
+[sub_resource type="Animation" id="Animation_5ksb1"]
+resource_name = "Fall"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
 
 [sub_resource type="Animation" id="Animation_vog66"]
 resource_name = "Idle"
@@ -22,6 +35,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_3p2k2"]
+resource_name = "Jump"
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [19]
 }
 
 [sub_resource type="Animation" id="Animation_ypk8g"]
@@ -57,39 +87,6 @@ tracks/0/keys = {
 "values": [6, 7, 8, 9, 10, 11]
 }
 
-[sub_resource type="Animation" id="Animation_3p2k2"]
-resource_name = "Jump"
-loop_mode = 1
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [19]
-}
-
-[sub_resource type="Animation" id="Animation_5ksb1"]
-resource_name = "Fall"
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [20]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7w2do"]
 _data = {
 "Fall": SubResource("Animation_5ksb1"),
@@ -99,6 +96,9 @@ _data = {
 "Run": SubResource("Animation_gffua")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7phbn"]
+size = Vector2(9, 17)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_gqhxu")
 
@@ -107,14 +107,14 @@ texture = ExtResource("1_e7d54")
 hframes = 6
 vframes = 7
 
-[node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 7.5)
-shape = SubResource("RectangleShape2D_7phbn")
-
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_7w2do")
 }
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 7.5)
+shape = SubResource("RectangleShape2D_7phbn")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
