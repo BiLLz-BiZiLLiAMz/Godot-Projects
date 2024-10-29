@@ -10,7 +10,7 @@ class_name PlayerController extends CharacterBody2D
 @onready var CoyoteTimer = $Timers/CoyoteTimer
 @onready var JumpBuffer = $Timers/JumpBufferTimer
 
-@export var Device: int = -1
+@export var Device: int
 
 # Raycasts
 #@onready var RCTopRight = $Raycasts/TopRight
@@ -29,19 +29,21 @@ class_name PlayerController extends CharacterBody2D
 #######################################################################
 
 # Player Horizontal Movement
-const RunSpeed = 480
-const SlideSpeed = 700
+const RunSpeed = 280
+const SlideSpeed = 320
 var MoveSpeed = RunSpeed
-const Acceleration = 100
+const Acceleration = 50
 
 # Player Jumping
 #const Gravity = Globals.Gravity
-const GravityFall = 1550
-const JumpVelocity = -650.0
+const GravityFall = 1350
+const JumpVelocity = -500.0
+const SlideJumpVelocity = -600
 const VariableJumpMultiplier = 0.5
 var CoyoteTime = 0.02;
 var isJumpInputBuffered = false
 var jumpInputBufferTime = 0.0
+var jumpSpeed = JumpVelocity
 
 # Player Inputs
 var movementInput = Vector2.ZERO
@@ -57,6 +59,7 @@ var shootInputPressed = false
 
 var canJump = true
 var canDash = false
+var canShoot = true
 
 # Player Sprite Direction
 var Facing
@@ -98,7 +101,7 @@ func _physics_process(delta):
 	
 	# Update the current state
 	currentState.Update(delta)
-	StateLabel.text = "Speed: " + str(MoveSpeed)
+	StateLabel.text = "Speed: " + str(jumpSpeed)
 	
 	# Commit movement
 	move_and_slide()

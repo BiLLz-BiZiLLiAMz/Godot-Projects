@@ -6,7 +6,8 @@ func EnterState():
 	
 	# Set the jump variables
 	Player.isJumpInputBuffered = false
-	Player.velocity.y = Player.JumpVelocity
+	Player.velocity.y = Player.jumpSpeed
+	Player.canShoot = true
 
 
 func ExitState():
@@ -31,7 +32,7 @@ func HandleAnimations():
 
 func HandleJump():
 	# See if the jump key is held, if not, slash the momentum
-	if (!Input.is_action_pressed("Jump")):
+	if (!Player.jumpInput):
 		Player.velocity.y *= Player.VariableJumpMultiplier
 		Player.ChangeState(States.JumpTransition)
 

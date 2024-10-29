@@ -4,6 +4,7 @@ func EnterState():
 	# Set the label
 	Player.currentStateDebug = "Slide"
 	Player.MoveSpeed = Player.SlideSpeed
+	Player.canShoot = false
 	Player.velocity.x = (Player.MoveSpeed) * Player.Facing
 
 
@@ -20,7 +21,7 @@ func Update(delta: float):
 
 
 func AnimationFinished():
-	print("TEST")
+	pass
 
 
 func HandleJump():
@@ -34,6 +35,7 @@ func HandleJump():
 	# Handle jump
 	if ((Player.jumpInputPressed) && Player.canJump): #or Player.isJumpInputBuffered
 		Player.isJumpInputBuffered = false
+		Player.jumpSpeed = Player.SlideJumpVelocity
 		Player.ChangeState(States.Jump)
 
 

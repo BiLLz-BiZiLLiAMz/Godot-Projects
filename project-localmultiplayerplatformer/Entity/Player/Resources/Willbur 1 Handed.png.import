@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpp8xm7n18nc8"
-path="res://.godot/imported/TileSet.png-6c2a2130d4e558795c82b95146ffed32.ctex"
+uid="uid://c7ekd1mcy1ddd"
+path="res://.godot/imported/Willbur 1 Handed.png-5073e87672eccbcdf304812dc33b57ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/TileSet.png"
-dest_files=["res://.godot/imported/TileSet.png-6c2a2130d4e558795c82b95146ffed32.ctex"]
+source_file="res://Entity/Player/Resources/Willbur 1 Handed.png"
+dest_files=["res://.godot/imported/Willbur 1 Handed.png-5073e87672eccbcdf304812dc33b57ae.ctex"]
 
 [params]
 

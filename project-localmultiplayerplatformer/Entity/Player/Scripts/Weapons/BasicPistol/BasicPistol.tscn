@@ -86,7 +86,7 @@ Name = "Basic Pistol"
 Bullet = ExtResource("2_4sdpi")
 Sprite = NodePath("Sprite")
 Animator = NodePath("Animator")
-Recoil = 2.0
+Recoil = 1.0
 Ammo = -1
 FireLeft = NodePath("FireLeft")
 FireRight = NodePath("FireRight")
@@ -112,4 +112,4 @@ position = Vector2(43, 28)
 position = Vector2(0, -36)
 
 [node name="FireDown" type="Marker2D" parent="."]
-position = Vector2(0, 55)
+position = Vector2(0, 58)

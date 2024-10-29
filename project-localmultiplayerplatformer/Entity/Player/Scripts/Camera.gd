@@ -1,7 +1,7 @@
 extends Camera2D
 
 @export var target : CharacterBody2D
-const SmoothingSpeed = 3
+const SmoothingSpeed = 8
 const CameraHorizontalLead = 0
 const CameraFallLead = 10
 var yLead = 0;

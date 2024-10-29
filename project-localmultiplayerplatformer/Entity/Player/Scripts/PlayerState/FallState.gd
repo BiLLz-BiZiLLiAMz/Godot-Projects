@@ -5,6 +5,7 @@ func EnterState():
 	Player.currentStateDebug = "Fall"
 	
 	# Check if we can jump then start the coyote timer
+	Player.canShoot = true
 	if Player.previousState == States.Grounded:
 		Player.canJump = true
 		Player.CoyoteTimer.start(Player.CoyoteTime)

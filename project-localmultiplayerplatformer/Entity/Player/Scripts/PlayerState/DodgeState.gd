@@ -3,7 +3,7 @@ extends PlayerState
 func EnterState():
 	# Set the label
 	Player.currentStateDebug = "Dodge"
-
+	Player.canShoot = false
 
 func ExitState():
 	pass

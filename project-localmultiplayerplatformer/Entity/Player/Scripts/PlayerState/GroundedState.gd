@@ -5,6 +5,7 @@ func EnterState():
 	# Set the state label
 	Player.currentStateDebug = "Grounded"
 	Player.canJump = true
+	Player.canShoot = true
 	Player.MoveSpeed = Player.RunSpeed
 
 func ExitState():
@@ -48,6 +49,7 @@ func HandleJump():
 	# Handle jump
 	if ((Player.jumpInputPressed) && Player.canJump): #or Player.isJumpInputBuffered
 		Player.isJumpInputBuffered = false
+		Player.jumpSpeed = Player.JumpVelocity
 		Player.ChangeState(States.Jump)
 
 

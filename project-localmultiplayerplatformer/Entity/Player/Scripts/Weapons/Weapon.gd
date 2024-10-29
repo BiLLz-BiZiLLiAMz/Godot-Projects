@@ -13,7 +13,10 @@ class_name Weapon extends Node2D
 @export var FireUp: Marker2D
 @export var FireDown: Marker2D
 
+var Device
+
 # Rate of fire is handled by the "Shoot" animation length
+
 
 func _ready():
 	
@@ -24,20 +27,46 @@ func _physics_process(delta):
 	if (Player != null): Sprite.flip_h = (Player.Facing < 0)
 
 
+
 func GetFireDirection() -> Vector2:
-	if (Input.is_action_pressed("MoveLeft")):
-		return Vector2.LEFT
-	elif (Input.is_action_pressed("MoveRight")):
-		return Vector2.RIGHT
-	elif (Input.is_action_pressed("MoveUp")):
-		return Vector2.UP
-	elif (Input.is_action_pressed("MoveDown")):
-		return Vector2.DOWN
+	if (Device < 0):
+		if (MultiplayerInput.is_action_pressed(Device, "MoveLeft")):
+			if (MultiplayerInput.is_action_pressed(Device, "MoveUp")):
+				return Vector2.UP
+			elif (MultiplayerInput.is_action_pressed(Device, "MoveDown")):
+				return Vector2.DOWN
+			else:
+				return Vector2.LEFT
+		elif (MultiplayerInput.is_action_pressed(Device, "MoveRight")):
+			if (MultiplayerInput.is_action_pressed(Device, "MoveUp")):
+				return Vector2.UP
+			elif (MultiplayerInput.is_action_pressed(Device, "MoveDown")):
+				return Vector2.DOWN
+			else:
+				return Vector2.RIGHT
+		elif (MultiplayerInput.is_action_pressed(Device, "MoveUp")):
+			return Vector2.UP
+		elif (MultiplayerInput.is_action_pressed(Device, "MoveDown")):
+			return Vector2.DOWN
+		else:
+			if (Player.Facing > 0):
+				return Vector2.RIGHT
+			else: 
+				return Vector2.LEFT
 	else:
-		if (Player.Facing > 0):
-			return Vector2.RIGHT
-		else: 
-			return Vector2.LEFT
+		if (MultiplayerInput.is_action_pressed(Device, "AimLeft")):
+				return Vector2.LEFT
+		elif (MultiplayerInput.is_action_pressed(Device, "AimRight")):
+				return Vector2.RIGHT
+		elif (MultiplayerInput.is_action_pressed(Device, "AimUp")):
+			return Vector2.UP
+		elif (MultiplayerInput.is_action_pressed(Device, "AimDown")):
+			return Vector2.DOWN
+		else:
+			if (Player.Facing > 0):
+				return Vector2.RIGHT
+			else: 
+				return Vector2.LEFT
 
 
 func GetBulletOriginPosition() -> Vector2:

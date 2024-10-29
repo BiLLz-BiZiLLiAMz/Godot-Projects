@@ -4,6 +4,7 @@ func EnterState():
 	# Set the state label
 	Player.currentStateDebug = "JumpTransition"
 	# Set the jump variables
+	Player.canShoot = true
 	Player.ChangeState(States.Fall)
 
 

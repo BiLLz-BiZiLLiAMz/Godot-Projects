@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://ce6tgtxbk61fx"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scripts/Weapons/Bullet.gd" id="1_1dd0c"]
-[ext_resource type="Texture2D" uid="uid://dotskfg433dei" path="res://Entity/Player/Resources/Weapons/BasicPistol/BasicPistol-Bullet.png" id="2_eqtn8"]
+[ext_resource type="Texture2D" uid="uid://h7u07bou1nod" path="res://Entity/Player/Resources/Weapons/Bullets.png" id="2_1gtb1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im2a3"]
-size = Vector2(10, 10)
+size = Vector2(20, 4)
 
 [node name="BasicBullet" type="Node2D" node_paths=PackedStringArray("Sprite", "Collider")]
 script = ExtResource("1_1dd0c")
@@ -15,7 +15,7 @@ Collider = NodePath("Collider")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("2_eqtn8")
+texture = ExtResource("2_1gtb1")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
@@ -23,7 +23,6 @@ region_rect = Rect2(0, 0, 16, 16)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
-position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_im2a3")
 debug_color = Color(1, 0, 0, 0.419608)
 
