@@ -27,6 +27,7 @@ func Update(delta: float):
 func HandleAnimations():
 	if (!(Player.Animator.current_animation == "AirDodge")):
 		Player.Animator.play("JumpUp")
+		Player.EnableHurtbox()
 	Player.HandleFlipH()
 
 

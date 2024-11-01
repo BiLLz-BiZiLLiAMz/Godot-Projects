@@ -8,8 +8,11 @@ func _ready() -> void:
 	super()
 	Device = Player.Device
 
+func _draw():
+	super()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _process(delta):
 	super(delta)
 	HandleShoot()
 	HandleAnimation()
@@ -23,11 +26,13 @@ func HandleShoot():
 					var _bullet = Bullet.instantiate()
 					_bullet.Direction = GetFireDirection()
 					_bullet.global_position = GetBulletOriginPosition()
+					#_bullet.rotation = GetFireRotation(_bullet.Direction)
 					get_tree().root.add_child(_bullet)
 					if (Ammo > 0): Ammo -= 1
 					Animator.play("Shoot")
 					# TODO: Play sound
 					Player.velocity += -_bullet.Direction * Recoil
+					queue_redraw()
 				else:
 					# TODO: Player no ammo sound
 					pass

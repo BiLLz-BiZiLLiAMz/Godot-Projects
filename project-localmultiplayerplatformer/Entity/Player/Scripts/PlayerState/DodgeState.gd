@@ -6,7 +6,7 @@ func EnterState():
 	Player.canShoot = false
 
 func ExitState():
-	pass
+	Player.EnableHurtbox()
 
 
 func Update(delta: float):

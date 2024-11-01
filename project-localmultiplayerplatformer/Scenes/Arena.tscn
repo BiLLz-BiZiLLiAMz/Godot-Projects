@@ -102,25 +102,25 @@ repeat_times = 2
 metadata/_edit_lock_ = true
 
 [node name="Image" type="TextureRect" parent="Parallax - Far"]
-offset_left = -1520.0
-offset_top = -888.0
-offset_right = -880.0
-offset_bottom = -528.0
+offset_left = -1536.0
+offset_top = -816.0
+offset_right = -896.0
+offset_bottom = -456.0
 scale = Vector2(5.03306, 4.15742)
 texture = ExtResource("1_4rkb3")
 
 [node name="Parallax - Medium" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.4, 0.4)
 repeat_times = 2
-metadata/_edit_lock_ = true
 
 [node name="Image" type="TextureRect" parent="Parallax - Medium"]
 offset_left = -424.0
-offset_top = -384.0
+offset_top = -416.0
 offset_right = 216.0
-offset_bottom = -24.0
-scale = Vector2(1.87178, 2.22258)
+offset_bottom = -56.0
+scale = Vector2(2.44364, 2.04244)
 texture = ExtResource("2_04bi1")
+metadata/_edit_lock_ = true
 
 [node name="Parallax - Close" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.6, 0.6)
@@ -128,11 +128,11 @@ repeat_times = 2
 metadata/_edit_lock_ = true
 
 [node name="Image" type="TextureRect" parent="Parallax - Close"]
-offset_left = -536.0
-offset_top = -456.0
-offset_right = 2931.0
-offset_bottom = 2192.0
-scale = Vector2(0.378291, 0.281506)
+offset_left = -592.0
+offset_top = -368.0
+offset_right = 2875.0
+offset_bottom = 2280.0
+scale = Vector2(0.435815, 0.282383)
 texture = ExtResource("3_m38yn")
 
 [node name="BK Assets" type="Sprite2D" parent="."]
@@ -178,10 +178,6 @@ texture = ExtResource("2_35qul")
 [node name="Tree-03" type="Sprite2D" parent="BK Assets"]
 position = Vector2(768, 0)
 scale = Vector2(0.833333, 1)
-texture = ExtResource("2_35qul")
-
-[node name="Tree-04" type="Sprite2D" parent="BK Assets"]
-position = Vector2(272, -352)
 texture = ExtResource("2_35qul")
 
 [node name="Tree-05" type="Sprite2D" parent="BK Assets"]
@@ -253,7 +249,7 @@ position = Vector2(-720, -80)
 texture = ExtResource("6_lpjvj")
 
 [node name="Player" parent="." instance=ExtResource("1_msqvv")]
-position = Vector2(155, 79)
+position = Vector2(432, -48)
 Device = -1
 
 [node name="Tiles" type="TileMapLayer" parent="."]
@@ -262,6 +258,10 @@ tile_set = SubResource("TileSet_gpk0h")
 metadata/_edit_lock_ = true
 
 [node name="FG Assets" type="Sprite2D" parent="."]
+
+[node name="Tree-04" type="Sprite2D" parent="FG Assets"]
+position = Vector2(272, -352)
+texture = ExtResource("2_35qul")
 
 [node name="Bush-01" type="Sprite2D" parent="FG Assets"]
 position = Vector2(-464, -176)

@@ -9,7 +9,7 @@ func EnterState():
 
 
 func ExitState():
-	pass
+	Player.EnableHurtbox()
 
 
 func Update(delta: float):

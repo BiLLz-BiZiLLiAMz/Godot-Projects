@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dllnpn0kui55c"
-path="res://.godot/imported/Willbur 1 Handed.png-5073e87672eccbcdf304812dc33b57ae.ctex"
+uid="uid://d28tl7descqso"
+path="res://.godot/imported/BulletIndicator.png-a29390c0b65d717f53d868288cbdd815.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entity/Player/Resources/Willbur 1 Handed.png"
-dest_files=["res://.godot/imported/Willbur 1 Handed.png-5073e87672eccbcdf304812dc33b57ae.ctex"]
+source_file="res://Entity/Player/Resources/BulletIndicator.png"
+dest_files=["res://.godot/imported/BulletIndicator.png-a29390c0b65d717f53d868288cbdd815.ctex"]
 
 [params]
 

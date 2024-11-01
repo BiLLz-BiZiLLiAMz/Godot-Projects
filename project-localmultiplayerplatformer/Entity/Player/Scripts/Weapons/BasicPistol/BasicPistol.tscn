@@ -95,7 +95,6 @@ FireDown = NodePath("FireDown")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_vqauv")
-hframes = 6
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {
@@ -103,10 +102,10 @@ libraries = {
 }
 
 [node name="FireLeft" type="Marker2D" parent="."]
-position = Vector2(-43, 28)
+position = Vector2(-24, 20)
 
 [node name="FireRight" type="Marker2D" parent="."]
-position = Vector2(43, 28)
+position = Vector2(24, 20)
 
 [node name="FireUp" type="Marker2D" parent="."]
 position = Vector2(0, -36)

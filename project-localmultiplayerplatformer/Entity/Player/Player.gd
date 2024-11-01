@@ -9,6 +9,8 @@ class_name PlayerController extends CharacterBody2D
 @onready var StateLabel = $DebugDisplay/StateLabel
 @onready var CoyoteTimer = $Timers/CoyoteTimer
 @onready var JumpBuffer = $Timers/JumpBufferTimer
+@onready var HurtBoxHead = $"HurtBox-Head/Head"
+@onready var HurtBoxBody = $"HurtBox-Body/Body"
 
 @export var Device: int
 
@@ -56,6 +58,10 @@ var climbDown = false
 var dodgeInput = false
 var shootInput = false
 var shootInputPressed = false
+var AimLeft = false
+var AimRight = false
+var AimUp = false
+var AimDown = false
 
 var canJump = true
 var canDash = false
@@ -89,7 +95,7 @@ func _ready() -> void:
 		state.Player = self
 	previousState = States.Fall
 	currentState = States.Fall
-	
+	EnableHurtbox()
 	# Get the facing direction to scale the sprite
 	SpriteXScale = Sprite.scale.x
 	Facing = SpriteXScale
@@ -97,7 +103,7 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	# Player input
-	PlayerInput()
+	GetInputStates()
 	
 	# Update the current state
 	currentState.Update(delta)
@@ -113,7 +119,7 @@ func ChangeState(nextState):
 	if nextState != null:
 		previousState = currentState 
 		currentState = nextState
-				
+		
 		previousState.ExitState()
 		currentState.EnterState()
 
@@ -124,7 +130,7 @@ func HandleHorizontalMovement():
 	velocity.x = move_toward(velocity.x, targetSpeed, Acceleration)
 
 
-func PlayerInput():
+func GetInputStates():
 	# Get the input direction
 	inputDirection = MultiplayerInput.get_axis(Device, "MoveLeft", "MoveRight")
 	
@@ -141,27 +147,24 @@ func PlayerInput():
 		movementInput.y += 1
 	
 	# jumps
-	if MultiplayerInput.is_action_pressed(Device, "Jump"):
-		jumpInput = true
-	else: 
-		jumpInput = false
-	if MultiplayerInput.is_action_just_pressed(Device, "Jump"):
-		jumpInputPressed = true
-	else: 
-		jumpInputPressed = false
-	
-	# Dodge
-	if (MultiplayerInput.is_action_just_pressed(Device, "Dodge")):
-		dodgeInput = true
-	else:
-		dodgeInput = false
-	
-	# Shoot
-	if (MultiplayerInput.is_action_just_pressed(Device, "Shoot")):
-		shootInput = true
-	else:
-		shootInput = false
+	jumpInput = MultiplayerInput.is_action_pressed(Device, "Jump")
+	jumpInputPressed = MultiplayerInput.is_action_just_pressed(Device, "Jump")
+	dodgeInput = MultiplayerInput.is_action_just_pressed(Device, "Dodge")
+	shootInput = MultiplayerInput.is_action_just_pressed(Device, "Shoot")
+	AimUp = MultiplayerInput.is_action_pressed(Device, "AimUp")
+	AimDown = MultiplayerInput.is_action_pressed(Device, "AimDown")
+	AimLeft = MultiplayerInput.is_action_pressed(Device, "AimLeft")
+	AimRight = MultiplayerInput.is_action_pressed(Device, "AimRight")
 
 
 func HandleFlipH():
 	Sprite.flip_h = (Facing < 1)
+
+
+func HandleAimAnimations():
+	pass
+
+
+func EnableHurtbox():
+	HurtBoxBody.disabled = false
+	HurtBoxHead.disabled = false

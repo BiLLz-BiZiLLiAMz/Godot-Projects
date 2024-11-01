@@ -18,12 +18,16 @@ var collided = false
 func _ready():
 	if (Direction == Vector2.RIGHT):
 		Sprite.rotation_degrees = 0
+		Collider.rotation_degrees = 0
 	elif (Direction == Vector2.LEFT):
 		Sprite.rotation_degrees = 180
+		Collider.rotation_degrees = 180
 	elif (Direction == Vector2.UP):
 		Sprite.rotation_degrees = 270
+		Collider.rotation_degrees = 270
 	elif (Direction == Vector2.DOWN):
 		Sprite.rotation_degrees = 90
+		Collider.rotation_degrees = 90
 
 
 func _physics_process(delta: float) -> void:
